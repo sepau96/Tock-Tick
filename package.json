@@ -1,0 +1,29 @@
+{
+  "name": "tock-tick",
+  "version": "1.0.0",
+  "description": "Aplicacion con node.js y mongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sepau96/Tock-Tick.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sepau96/Tock-Tick/issues"
+  },
+  "homepage": "https://github.com/sepau96/Tock-Tick#readme",
+  "keywords": [],
+  "dependencies": {
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.1",
+    "fs-extra": "^9.1.0",
+    "md5": "^2.3.0",
+    "mongoose": "^5.11.18",
+    "morgan": "^1.10.0"
+  }
+}
