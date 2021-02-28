@@ -4,7 +4,7 @@
   "description": "Aplicacion con node.js y mongoDB",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,9 @@
     "express-handlebars": "^5.2.1",
     "fs-extra": "^9.1.0",
     "md5": "^2.3.0",
+    "mongodb": "^3.6.4",
     "mongoose": "^5.11.18",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2"
   }
 }
