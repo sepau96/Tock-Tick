@@ -1,0 +1,9 @@
+body{
+    background-color: rgb(233, 233, 233)!important;
+}
+
+.navbar-brand img{
+    width: 20%;
+    margin-left: .8rem;
+}
+
