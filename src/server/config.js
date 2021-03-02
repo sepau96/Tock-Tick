@@ -38,7 +38,7 @@ module.exports = app => {
     app.use(express.json())
 
     
-
+    
     
 
     //routes
@@ -46,9 +46,14 @@ module.exports = app => {
 
 
     //static files
-    app.use('/public',express.static(path.join(__dirname, '../public')))
+    app.use('/public',express.static(path.join(__dirname, '../public')));
+    
 
-
+    app.use(function (req, res) {
+        if (res.status(404)) {
+            res.render('404');
+        }
+      });
 
 
     //Error handler
