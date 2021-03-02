@@ -4,7 +4,8 @@
   "description": "Aplicacion con node.js y mongoDB",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index",
+    "start": "node src/index"
   },
   "repository": {
     "type": "git",
