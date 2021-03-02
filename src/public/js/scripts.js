@@ -1,7 +1,17 @@
+
+
+
+
+
+$('#upload-body').hide();
+$('#btn-upload').click(e => {
+    e.preventDefault();
+    $('#upload-body').slideToggle();
+})
+
+
+
 $('#post-comment').hide();
-
-
-
 $('#btn-toggle-comment').click(e => {
     e.preventDefault();
     $('#post-comment').slideToggle();

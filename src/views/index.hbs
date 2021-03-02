@@ -2,14 +2,14 @@
 
 <div class="card mt-2">
     <div class="card-header bg-dark text-white">
-        <h3> <i class="far fa-images"></i>Subidas recientes</h3>
+        <h3> <i class="far fa-images mr-3"></i>Subidas recientes</h3>
     </div>
     <div class="card-body">
         <div class="row">
             {{#each images}}
-            <div class="col-md-12 mt-5 align-items-center ">
+            <div class="col-md-12 mb-5 align-items-center ">
                 <a href="/images/{{uniqueId}}">
-                    <img src="/public/upload/{{filename}}" alt="" class="w-100 h-100 img-thumbnail">
+                    <img src="/public/upload/{{filename}}" class="w-100 h-100 img-thumbnail" id="img-prueba">
                 </a>
             </div>
             {{/each}}
@@ -17,39 +17,3 @@
     </div>
 </div>
 
-<div class="card mt-5">
-    <div class="card-header bg-dark">
-        <h3 class="card-title text-white ">
-            <i class="far fa-image"></i><label class="pl-3">Cargar una imagen</label>
-        </h3>
-    </div>
-    <div class="card-body">
-        <form action="/images" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input type="file" name="image" class="custom-file-input" id="inputGroup"
-                            aria-describedby="inputGroupFileAddon" required>
-                        <label class="custom-file-label" for="inputGroup">Subir una imagen</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <input type="text" name="title" class="form-control" placeholder="Titulo de la imagen" required>
-            </div>
-
-            <div class="form-group">
-                <textarea name="description" rows="2" class="form-control" placeholder="Descripcion de la imagen"
-                    required></textarea>
-            </div>
-
-            <div class="form-group">
-                <button class="btn btn-success">
-                    <i class="fa fa-upload mr-3"></i>Subir imagen
-                </button>
-            </div>
-        </form>
-
-    </div>
-</div>
