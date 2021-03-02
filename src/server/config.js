@@ -1,3 +1,6 @@
+const Handlebars = require('handlebars')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+
 const path = require('path')
 const exphbs = require('express-handlebars')
 
@@ -9,7 +12,7 @@ const express = require('express')
 const routes = require('../routes/index')
 const erroHandler = require('errorhandler')
 
-const errorHandler = require('errorHandler')
+
 
 module.exports = app => {
     app.set('port',process.env.PORT || 3000);
@@ -20,7 +23,9 @@ module.exports = app => {
         partialsDir: path.join(app.get('views'), 'partials'),
         layoutsDir: path.join(app.get('views'), 'layouts'),
         extname: '.hbs',
-        helpers: require('./helpers')
+        helpers: require('./helpers'),
+        handlebars: allowInsecurePrototypeAccess(Handlebars)
+
     }))
 
     app.set('view engine', '.hbs')
