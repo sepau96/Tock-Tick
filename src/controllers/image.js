@@ -3,14 +3,15 @@ const { randomNumber } = require("../helpers/lib");
 const fs = require("fs-extra");
 
 const { Image, Comment } = require("../models");
+const sidebar = require('../helpers/sidebar')
 
 const md5 = require("md5");
 
 const ctrl = {};
 
 ctrl.index = async (req, res) => {
-    const viewModel = {image:{}, comments:{}}
-  const image = await Image.findOne({
+    let viewModel = {image:{}, comments:{}}
+    const image = await Image.findOne({
     filename: { $regex: req.params.image_id },
   });
 
@@ -22,7 +23,8 @@ ctrl.index = async (req, res) => {
 
     const comments = await Comment.find({ image_id: image._id });
     viewModel.comments = comments;
-    res.render("image", viewModel);
+    viewModel = await sidebar(viewModel)
+    res.render('image', viewModel);
   } else {
       res.redirect('/')
   }
@@ -91,6 +93,16 @@ ctrl.comment = async (req, res) => {
   }
 };
 
-ctrl.remove = (req, res) => {};
+ctrl.remove = async(req, res) => {
+  
+    const image = await Image.findOne({filename: {$regex: req.params.image_id}});
+    if (image) {
+      await fs.unlink(path.resolve('./src/public/upload/' + image.filename));
+      await Comment.deleteOne({image_id: image._id})
+      await image.remove();
+      res.json(true)
+    }
+    
+}
 
 module.exports = ctrl;

@@ -38,7 +38,7 @@
         </button>
     </div>
     <div class="card-body">
-        <blockquote>
+        <blockquote id="post-comment">
             <form action="/images/{{image.uniqueId}}/comment" method="POST">
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" placeholder="Nombre">
@@ -47,7 +47,7 @@
                     <input type="email" class="form-control" name="email" placeholder="Email">
                 </div>
                 <div class="form-group">
-                    <textarea name="comment" rows="10" class="form-control" placeholder="Comentario"></textarea>
+                    <textarea name="comment" rows="2" class="form-control" placeholder="Comentario"></textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success" id="btn-comment">
