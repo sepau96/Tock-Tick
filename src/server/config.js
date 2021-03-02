@@ -37,6 +37,10 @@ module.exports = app => {
     app.use(express.urlencoded({extended:false}))
     app.use(express.json())
 
+    
+
+    
+
     //routes
     routes(app);
 

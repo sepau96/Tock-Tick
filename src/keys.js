@@ -1,6 +1,8 @@
+require('dotenv').config();
+
 module.exports = {
     database:{
-        URI : 'mongodb+srv://sepau96:tula1234@cluster0.cbseu.mongodb.net/toktik?retryWrites=true&w=majority'
+        URI : `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.cbseu.mongodb.net/${process.env.DBNAME }?retryWrites=true&w=majority`
     }
 }
 

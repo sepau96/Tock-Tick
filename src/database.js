@@ -6,7 +6,7 @@ const { database } = require('./keys')
  
 
 
- mongoose.connect(database.URI, {
+ const basedatos = mongoose.connect(database.URI, {
      useNewUrlParser: true,
      useUnifiedTopology: true
     })
