@@ -4,7 +4,7 @@
   "description": "Aplicacion con node.js y mongoDB",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index",
+    "dev": "node src/index",
     "start": "node src/index"
   },
   "repository": {
