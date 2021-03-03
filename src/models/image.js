@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const path = require('path')
-
+//modelo de entrada de datos de imagenes a la base de datos
 const ImageSchema = new Schema({
     title:{type:String},
     description:{type:String},
@@ -11,13 +11,11 @@ const ImageSchema = new Schema({
     views:{type:Number, default: 0},
     likes:{type:Number, default: 0},
     timestamp:{type:Date, default:Date.now}
-
-
 });
 
 ImageSchema.virtual('uniqueId')
     .get(function() {
-        return this.filename.replace(path.extname(this.filename), '');
+        return this.filename.replace(path.extname(this.filename),'');
     })
 
 module.exports = mongoose.model('Image', ImageSchema);

@@ -3,6 +3,7 @@ const router = express.Router()
 const home = require('../controllers/home')
 const image = require('../controllers/image')
 
+//Rutas de archivos
 module.exports = app => {
     router.get('/', home.index);
     router.get('/images/:image_id', image.index);

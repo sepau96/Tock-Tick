@@ -11,3 +11,11 @@ body{
     height: 10%;
     width: 10%;
 }
+
+input, textarea{
+    background-color: rgb(39, 43, 48)!important;
+}
+
+.custom-file-input{
+    background-color: rgb(39, 43, 48)!important;
+}

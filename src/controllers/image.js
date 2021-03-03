@@ -1,20 +1,20 @@
+
+//Archivos requeridos para poder hacer funcionar las funciones
 const path = require("path");
 const { randomNumber } = require("../helpers/lib");
 const fs = require("fs-extra");
-
 const { Image, Comment } = require("../models");
-const sidebar = require('../helpers/sidebar')
-
+const sidebar = require('../helpers/sidebar');
 const md5 = require("md5");
-
 const ctrl = {};
 
+//Controlador del index
 ctrl.index = async (req, res) => {
     let viewModel = {image:{}, comments:{}}
     const image = await Image.findOne({
     filename: { $regex: req.params.image_id },
   });
-
+    //si hay un imagen me la renderiza sino se va al index
   if (image) {
 
     image.views = image.views + 1;
@@ -30,9 +30,14 @@ ctrl.index = async (req, res) => {
   }
 };
 
+//Controlador de crear imagen
 ctrl.create = (req, res) => {
   const saveImage = async () => {
+
+    //Le damos un nombre aleatorio 
     const imgUrl = randomNumber();
+
+    //Comprobamos que el nombre no existe con una funcion recursiva
     const images = await Image.find({ filename: imgUrl });
     if (images.length > 0) {
       saveImage();
@@ -41,6 +46,9 @@ ctrl.create = (req, res) => {
       const ext = path.extname(req.file.originalname).toLowerCase();
       const targetPath = path.resolve(`src/public/upload/${imgUrl}${ext}`);
 
+      //Extensiones de archivos permitidos: 
+      //Si esta permitida la crea y te manda a la pagina de la imagen
+      //Sino te manda un error 500 de fallo al crear la imagen
       if (
         ext === ".png" ||
         ext === ".jpg" ||
@@ -48,34 +56,42 @@ ctrl.create = (req, res) => {
         ext === ".gif"
       ) {
         await fs.rename(imageTempPath, targetPath);
+
+        //creamos en objeto imagen para mostrarla en el body
         const newImg = new Image({
           title: req.body.title,
           filename: imgUrl + ext,
           description: req.body.description,
         });
+
+        //Guardamos la imagen en la base de datos
         const imageSave = await newImg.save();
         res.redirect("/images/" + imgUrl);
       } else {
         await fs.unlink(imageTempPath);
-        res.status(500).json({ error: "Solo imagenes permitidas" });
+        res.status(500).render('500')
       }
     }
   };
   saveImage();
 };
 
+//Controlador de los likes de las imagenes
 ctrl.like = async(req, res) => {
+  //Buscamos la imagen
   const image = await Image.findOne({filename: {$regex: req.params.image_id}})
 
+  //Si existe la imagen le incrementamos los likes , sino salta un error 500
   if (image) {
     image.likes = image.likes +1;
     await image.save();
     res.json({likes: image.likes})
   } else {
-    res.status(500).json({error: 'Error interno maricon'})
+    res.status(500).render('500')
   }
 };
 
+//controlador de los comentatios de las imagenes
 ctrl.comment = async (req, res) => {
   const image = await Image.findOne({
     filename: { $regex: req.params.image_id },
@@ -93,6 +109,7 @@ ctrl.comment = async (req, res) => {
   }
 };
 
+//Controlador de eliminar una imagen
 ctrl.remove = async(req, res) => {
   
     const image = await Image.findOne({filename: {$regex: req.params.image_id}});
@@ -100,9 +117,8 @@ ctrl.remove = async(req, res) => {
       await fs.unlink(path.resolve('./src/public/upload/' + image.filename));
       await Comment.deleteOne({image_id: image._id})
       await image.remove();
-      res.json(true)
     }
-    
 }
 
+//Exportacion del controlador
 module.exports = ctrl;
